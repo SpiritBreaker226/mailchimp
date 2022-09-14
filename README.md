@@ -1,5 +1,28 @@
 # Front-end Choose Your Own Adventure Take-Home
 
+## To Install
+
+### Server
+
+ 1. In the terminal make sure you are in the project's root directory
+ 2. Go to the `cd server` directory
+ 3. Run `npm i`
+
+### Frontend
+
+ 1. In the terminal make sure you are in the project's root directory
+ 2. Go to the `cd frontend` directory
+ 3. Run `npm i`
+ 4. Run `cp .env.example .env`
+
+## To Run Both Frontend & Server
+
+ 1. In the terminal make sure you are in the project's root directory
+ 2. Go to the `cd server` directory
+ 3. Run `npm run dev`
+
+## Instructions
+
 Design and build a comments feed that displays all comments and notifies a user in real-time when new comments are added.
 
 Here is the data schema for a Comment:
