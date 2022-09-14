@@ -23,7 +23,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll=false",
+    "test:watch": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -45,6 +46,7 @@
     ]
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.5.0",
     "@types/styled-components": "^5.1.26"
   }
 }
