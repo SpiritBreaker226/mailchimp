@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 import ErrorBoundary from './Components/ErrorBoundary'
 import { AddComment } from './AddComment'
-import { Comment } from './Comments'
+import { Comments } from './Comments'
 import { AppProvider } from './context'
 import { ThemeProvider } from './theme'
 
@@ -36,16 +36,7 @@ const App = () => (
             <AddComment />
           </AppBodyContent>
 
-          <AppBodyContent>
-            <Comment
-              remark={{
-                id: 1,
-                name: 'Billy Bob',
-                message: 'This is more then I can handle',
-                created: new Date(),
-              }}
-            />
-          </AppBodyContent>
+          <Comments />
         </AppBody>
       </AppProvider>
     </ThemeProvider>
