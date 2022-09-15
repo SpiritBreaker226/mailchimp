@@ -1,14 +1,26 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react'
 import axios from 'axios'
 
-import { render } from '../../testUtil'
+import { AppProvider, comment, initialState, render } from '../../testUtil'
+import { InitialState, Types } from '../../types'
 import { AddComment } from '../AddComment'
 
 jest.mock('axios')
 const mockedAxios = axios as jest.Mocked<typeof axios>
 
+const mockDispatch = jest.fn()
+
 describe('AddComment', () => {
-  const setUp = () => render(<AddComment />)
+  const setUp = (
+    state: Partial<InitialState> = {},
+    dispatch = mockDispatch
+  ) => {
+    render(
+      <AppProvider state={{ ...initialState, ...state }} dispatch={dispatch}>
+        <AddComment />
+      </AppProvider>
+    )
+  }
   const fillForm = () => {
     fireEvent.change(screen.getByRole('textbox', { name: 'Name' }), {
       target: { value: 'Billy Bob' },
@@ -21,7 +33,7 @@ describe('AddComment', () => {
   }
 
   it('should submit a valid form', async () => {
-    mockedAxios.post.mockResolvedValue({ status: 201 })
+    mockedAxios.post.mockResolvedValue(comment)
 
     setUp()
 
@@ -32,12 +44,8 @@ describe('AddComment', () => {
     expect(screen.getByRole('button', { name: 'Comment' })).toBeDisabled()
 
     await waitFor(() =>
-      expect(mockedAxios.post).toHaveBeenCalledWith(
-        expect.stringContaining('/createComment'),
-        {
-          name: 'Billy Bob',
-          message: 'Hey',
-        }
+      expect(mockDispatch).toHaveBeenCalledWith(
+        expect.objectContaining({ type: Types.AddComment })
       )
     )
   })

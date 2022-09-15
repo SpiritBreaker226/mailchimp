@@ -4,7 +4,8 @@ import { FC, useState } from 'react'
 import styled from 'styled-components'
 
 import { Button, ErrorMessage, Textbox } from '../Components'
-import { Comment } from '../types'
+import { useApp } from '../context'
+import { Comment, Types } from '../types'
 import { AddCommentSchema } from './AddCommentSchema'
 
 const AddCommentContainer = styled.section`
@@ -31,6 +32,7 @@ export type FormikValueType = Pick<Comment, 'name' | 'message'>
 
 export const AddComment: FC = () => {
   const [serverError, setServerError] = useState<string>()
+  const { dispatch } = useApp()
 
   return (
     <AddCommentContainer>
@@ -46,12 +48,23 @@ export const AddComment: FC = () => {
           message: '',
         }}
         validationSchema={AddCommentSchema}
-        onSubmit={async (values) => {
+        onSubmit={async (values, { resetForm }) => {
           try {
-            await axios.post(
+            const res = await axios.post<Comment>(
               `${process.env.REACT_APP_SERVER_URL}/createComment`,
               values
             )
+
+            const newComment = await res.data
+
+            dispatch({
+              type: Types.AddComment,
+              payload: {
+                newComment,
+              },
+            })
+
+            resetForm()
           } catch (error) {
             const currentError = error as AxiosError | Error
             const errorMessage = axios.isAxiosError(currentError)
