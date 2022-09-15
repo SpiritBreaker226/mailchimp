@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import ErrorBoundary from './Components/ErrorBoundary'
 import { AddComment } from './AddComment'
 import { Comment } from './Comments'
+import { AppProvider } from './context'
 import { ThemeProvider } from './theme'
 
 const AppBody = styled.main`
@@ -27,24 +28,26 @@ const AppBodyContent = styled.section`
 const App = () => (
   <ErrorBoundary>
     <ThemeProvider>
-      <AppBody>
-        <AppHeader>Comments Feed</AppHeader>
+      <AppProvider>
+        <AppBody>
+          <AppHeader>Comments Feed</AppHeader>
 
-        <AppBodyContent>
-          <AddComment />
-        </AppBodyContent>
+          <AppBodyContent>
+            <AddComment />
+          </AppBodyContent>
 
-        <AppBodyContent>
-          <Comment
-            remark={{
-              id: 1,
-              name: 'Billy Bob',
-              message: 'This is more then I can handle',
-              created: new Date(),
-            }}
-          />
-        </AppBodyContent>
-      </AppBody>
+          <AppBodyContent>
+            <Comment
+              remark={{
+                id: 1,
+                name: 'Billy Bob',
+                message: 'This is more then I can handle',
+                created: new Date(),
+              }}
+            />
+          </AppBodyContent>
+        </AppBody>
+      </AppProvider>
     </ThemeProvider>
   </ErrorBoundary>
 )
