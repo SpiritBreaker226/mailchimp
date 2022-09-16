@@ -63,7 +63,6 @@ export const AddComment: FC = () => {
                 newComment: {
                   id,
                   ...values,
-                  created: new Date().toString(),
                 },
               },
             })

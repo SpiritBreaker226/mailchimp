@@ -40,7 +40,6 @@ describe('App', () => {
 
     await waitFor(() => {
       screen.getByText(comment.name, { exact: false })
-      screen.getByText(comment.message, { exact: false })
     })
   })
 
