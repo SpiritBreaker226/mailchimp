@@ -11,25 +11,29 @@ export type CommentProps = {
   remark: CommentType
 }
 
-export const Comment: FC<CommentProps> = ({ remark }) => (
-  <article>
-    <p>{remark.message}</p>
-    <CommentFooterContainer>
-      <p>
-        {remark.name} on{' '}
-        <time dateTime={remark.created.toISOString()}>
-          {remark.created.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: '2-digit',
-          })}{' '}
-          at{' '}
-          {remark.created.toLocaleTimeString('en-US', {
-            hour: 'numeric',
-            minute: 'numeric',
-          })}
-        </time>
-      </p>
-    </CommentFooterContainer>
-  </article>
-)
+export const Comment: FC<CommentProps> = ({ remark }) => {
+  const createdDate = new Date(remark.created)
+
+  return (
+    <article>
+      <p>{remark.message}</p>
+      <CommentFooterContainer>
+        <p>
+          {remark.name} on{' '}
+          <time dateTime={createdDate.toISOString()}>
+            {createdDate.toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: '2-digit',
+            })}{' '}
+            at{' '}
+            {createdDate.toLocaleTimeString('en-US', {
+              hour: 'numeric',
+              minute: 'numeric',
+            })}
+          </time>
+        </p>
+      </CommentFooterContainer>
+    </article>
+  )
+}
