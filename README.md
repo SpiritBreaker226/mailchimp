@@ -21,6 +21,14 @@
  2. Go to the `cd server` directory
  3. Run `npm run dev`
 
+## Notes
+
+### Ideas
+
+- For the message field, discuss the maximum number of charters the user can use, then add a counter to show how many characters are left for the user to use, so they are aware of the number of characters they are allowed to use.
+- Move the logic to access the server to custom hooks to reduce the side effects that each component is creating and help test the server with the unit test on the hooks.
+- Add logic to get the details of the comment after the user creates or asks to update the endpoint to send down the new comment to reduce the number of calls to the server, thus reducing the number of calls to the server.
+
 ## Instructions
 
 Design and build a comments feed that displays all comments and notifies a user in real-time when new comments are added.
