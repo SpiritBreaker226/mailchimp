@@ -3,5 +3,6 @@ export const theme = {
   text: '#241c15',
   secondary: '#fff',
   error: '#ff0000',
+  newBgColor: '#fdf8ea',
   buttonBgColor: '#ffe01b',
 }

@@ -7,8 +7,16 @@ import { useApp } from '../context'
 import { Comment as CommentType, Types } from '../types'
 import { Comment } from './Comment'
 
-const AppBodyContent = styled.div`
+const AppBodyContent = styled.div.attrs<{ isNew?: boolean }>((props) => ({
+  isNew: props.isNew || false,
+}))<{ isNew?: boolean }>`
   ${contentStyle}
+
+  ${(props) =>
+    props.isNew &&
+    `
+    background-color: ${props.theme.newBgColor};
+    `}}
 `
 
 export const Comments: FC = () => {
@@ -53,7 +61,7 @@ export const Comments: FC = () => {
   return (
     <>
       {state.comments.map((comment) => (
-        <AppBodyContent key={comment.id}>
+        <AppBodyContent key={comment.id} isNew={!comment.created}>
           <Comment remark={comment} />
         </AppBodyContent>
       ))}
