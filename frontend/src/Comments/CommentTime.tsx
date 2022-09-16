@@ -21,7 +21,6 @@ export const CommentTime: FC<CommentTimeProps> = ({ created }) => {
       on{' '}
       <time dateTime={createdDate.toISOString()}>
         {createdDate.toLocaleDateString(userLocale, {
-          year: 'numeric',
           month: 'long',
           day: '2-digit',
         })}{' '}
