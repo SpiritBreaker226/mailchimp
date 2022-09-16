@@ -33,7 +33,9 @@ describe('AddComment', () => {
   }
 
   it('should submit a valid form', async () => {
-    mockedAxios.post.mockResolvedValue(comment)
+    mockedAxios.post
+      .mockResolvedValue({ name: comment.name, message: comment.message })
+      .mockReturnValue(Promise.resolve({ data: { id: comment.id } }))
 
     setUp()
 

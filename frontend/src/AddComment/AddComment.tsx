@@ -50,17 +50,21 @@ export const AddComment: FC = () => {
         validationSchema={AddCommentSchema}
         onSubmit={async (values, { resetForm }) => {
           try {
-            const res = await axios.post<Comment>(
+            const res = await axios.post<{ id: Comment['id'] }>(
               `${process.env.REACT_APP_SERVER_URL}/createComment`,
               values
             )
 
-            const newComment = await res.data
+            const { id } = await res.data
 
             dispatch({
               type: Types.AddComment,
               payload: {
-                newComment,
+                newComment: {
+                  id,
+                  ...values,
+                  created: new Date().toString(),
+                },
               },
             })
 

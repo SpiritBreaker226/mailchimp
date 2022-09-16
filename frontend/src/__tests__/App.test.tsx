@@ -16,9 +16,9 @@ describe('App', () => {
 
     mockedAxios.post
       .mockResolvedValue(requestToServerValues)
-      .mockReturnValue(Promise.resolve({ data: comment }))
+      .mockReturnValue(Promise.resolve({ data: { id: comment.id } }))
 
-    mockedAxios.get.mockReturnValue(Promise.resolve({ data: [comment] }))
+    mockedAxios.get.mockReturnValue(Promise.resolve({ data: [] }))
 
     setUp()
 
