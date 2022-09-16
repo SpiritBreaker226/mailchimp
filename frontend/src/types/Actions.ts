@@ -6,12 +6,16 @@ export type InitialState = {
 
 export enum Types {
   AddComment = 'ADD_COMMENT',
+  AddComments = 'ADD_COMMENTS',
   RemoveComments = 'REMOVE_COMMENTS',
 }
 
 type CommentPayload = {
   [Types.AddComment]: {
     newComment: Comment
+  }
+  [Types.AddComments]: {
+    comments: Comment[]
   }
   [Types.RemoveComments]: {}
 }

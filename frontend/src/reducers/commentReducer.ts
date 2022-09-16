@@ -11,6 +11,11 @@ export const commentReducer = (state: InitialState, action: Action) => {
         ...state,
         comments,
       }
+    case Types.AddComments:
+      return {
+        ...state,
+        comments: action.payload.comments,
+      }
     case Types.RemoveComments:
       return {
         ...state,
