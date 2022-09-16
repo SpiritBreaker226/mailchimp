@@ -24,8 +24,13 @@ const AddCommentHeader = styled.h2`
 
 const SubmitCommentContainer = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
   margin-top: 1.5rem;
+`
+
+const SuccessMessage = styled.p`
+  font-weight: 500;
 `
 
 export type FormikValueType = Pick<Comment, 'name' | 'message'>
@@ -48,7 +53,7 @@ export const AddComment: FC = () => {
           message: '',
         }}
         validationSchema={AddCommentSchema}
-        onSubmit={async (values, { resetForm }) => {
+        onSubmit={async (values, { resetForm, setStatus }) => {
           try {
             const res = await axios.post<{ id: Comment['id'] }>(
               `${process.env.REACT_APP_SERVER_URL}/createComment`,
@@ -68,6 +73,7 @@ export const AddComment: FC = () => {
             })
 
             resetForm()
+            setStatus({ success: 'Comment added to Comments Feed' })
           } catch (error) {
             const currentError = error as AxiosError | Error
             const errorMessage = axios.isAxiosError(currentError)
@@ -78,7 +84,7 @@ export const AddComment: FC = () => {
           }
         }}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, status }) => (
           <Form>
             <Textbox
               name="name"
@@ -96,6 +102,8 @@ export const AddComment: FC = () => {
             />
 
             <SubmitCommentContainer>
+              <SuccessMessage>{status && status.success}</SuccessMessage>
+
               <Button disabled={isSubmitting} type="submit">
                 Comment
               </Button>
