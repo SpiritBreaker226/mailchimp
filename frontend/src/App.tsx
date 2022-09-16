@@ -5,6 +5,7 @@ import { AddComment } from './AddComment'
 import { Comments } from './Comments'
 import { AppProvider } from './context'
 import { ThemeProvider } from './theme'
+import { contentStyle } from './Components'
 
 const AppBody = styled.main`
   display: flex;
@@ -19,10 +20,7 @@ const AppHeader = styled.h1`
 `
 
 const AppBodyContent = styled.section`
-  padding: 0.75rem 1.5rem;
-  border-radius: 1em;
-  box-shadow: 0 0 0 0.0625rem ${(props) => props.theme.text};
-  margin-bottom: 2rem;
+  ${contentStyle}
 `
 
 const App = () => (

@@ -2,15 +2,13 @@ import axios from 'axios'
 import { FC, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
+import { contentStyle } from '../Components'
 import { useApp } from '../context'
 import { Comment as CommentType, Types } from '../types'
 import { Comment } from './Comment'
 
 const AppBodyContent = styled.div`
-  padding: 0.75rem 1.5rem;
-  border-radius: 1em;
-  box-shadow: 0 0 0 0.0625rem ${(props) => props.theme.text};
-  margin-bottom: 2rem;
+  ${contentStyle}
 `
 
 export const Comments: FC = () => {
